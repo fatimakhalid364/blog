@@ -1,0 +1,9 @@
+<%-include ("navbar.ejs") %>
+<%polBlogs.forEach((blog) => {%>
+    <h1><%=blog.title%></h1>
+    <p><%=blog.name%></p>
+    <p><%=blog.created_at%></p>
+    <p><%=blog.content%></p>
+
+
+<%})%>

@@ -1,0 +1,60 @@
+<%-include ("navbar.ejs") %>
+<%- include("searchbar.ejs") %>
+<div class="my-blogs-div" id="myblogslistid--">
+    <%- include("scrollbox.ejs") %>
+    <div class="my-blogs-list" >
+    
+    <%myBlogs.forEach((myBlog)=> {%>
+        <form class="recent-blogs" action="/myrealblogs" method="post">
+            <input type="submit" name="myrblog" value="<%=myBlog.title%>" id="<%=myBlog.title%>" hidden>
+            <label for="<%=myBlog.title%>" class="blogger-label"><%=myBlog.title%></label>
+        
+        </form>
+        <p class="name"><%=myBlog.name%></p>
+        <p class="time"><%=myBlog.created_at%></p>
+        
+        
+
+    <%})%>
+    </div>
+    <%- include("gotoplanner.ejs") %>
+</div>
+<script>
+function redirectToPlanner() {
+            window.location.href = "/planner";
+        }
+
+var scrollBoxId = document.getElementById("scroll-box-id");
+    var headdiv = document.getElementById("headingdivid");
+    var bulbImg = document.getElementById("bulbimgid");
+    var searchBarId = document.getElementById("search-bar-id");
+    var myBlogsId = document.getElementById("myblogslistid--");
+    var myLabelId = document.getElementById("mylabelid");
+    window.onscroll = scrollToFixed;
+    document.addEventListener("DOMContentLoaded", appear);
+    function appear() {
+        myLabelId.classList.add("myblog-label-loaded");
+    }
+    
+    function scrollToFixed() {
+        var scrollPosition = window.scrollY;
+        var viewPortHeight = window.innerHeight;
+        var fixedThreshold = viewPortHeight * 0.14;
+        
+        if (scrollPosition > fixedThreshold) {
+            scrollBoxId.classList.add("scroll-box-fixed");
+            headdiv.classList.add("headingdivfixed");
+            bulbImg.classList.add("bulb-img-fixed");
+            searchBarId.classList.add("search-bar-fixed");
+            myBlogsId.classList.add("my-blogs-div-fixed")
+        } else {
+            scrollBoxId.classList.remove("scroll-box-fixed");
+            headdiv.classList.remove("headingdivfixed");
+            bulbImg.classList.remove("bulb-img-fixed");
+            searchBarId.classList.remove("search-bar-fixed");
+            myBlogsId.classList.remove("my-blogs-div-fixed");
+        }
+    };
+</script>
+
+

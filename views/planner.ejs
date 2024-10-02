@@ -1,0 +1,25 @@
+<div class="blogplanner">
+    <%userplans.forEach((plan)=>{%>
+        <div class="boxset">
+        <form class="dayformdel" action="/delete" method="post">
+            <input type="checkbox" onchange="this.form.submit()" name="deltaskid" value="<%=plan.id%>">
+        </form>
+        <p id="task<%=plan.id%>" class="taskpara"><%=plan.plans%></p>
+        <form class="dayformedit" action="/edit" method="post">
+            <input class="text-type" type="text" id="input<%=plan.id%>" name="edittask" value="<%=plan.plans%>" autocomplete="off" autofocus="true" hidden="true">
+            <input type="hidden" name="changetask" value="<%=plan.id%>">
+            <button type="submit" id="done<%=plan.id%>" class="edit" hidden="true"><img class="icon" src="/tick.jpg" alt="tick image" ></button>
+
+        </form>
+        <button id="edit<%=plan.id%>" class="edit" onclick="handler(<%=plan.id%>)"><img class="icon" src="/pencil.jpg" alt="pencil image"></button>
+        </div>
+
+    <%})%>
+
+    <form class="dayformadd" action="/add" method="post">
+        <input type="text" name="newplan" id="newplan" placeholder="New Task" autocomplete="off" autofocus="true">
+        <button type="submit" class="addplan" name="addplanday" value="monday">+</button>
+    </form>
+    </div>
+
+    

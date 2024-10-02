@@ -1,0 +1,45 @@
+<%-include("navbar.ejs") %>
+<div class="container-2">
+    <div class="falling-text">
+        <span>T</span>
+        <span>h</span>
+        <span>e</span>
+        <span></span>
+        <span></span>
+        <span>T</span>
+        <span>h</span>
+        <span>o</span>
+        <span>u</span>
+        <span>g</span>
+        <span>h</span>
+        <span>t</span>
+        <span></span>
+        <span></span>
+        <span>A</span>
+        <span>l</span>
+        <span>l</span>
+        <span>e</span>
+        <span>y</span>
+    </div>
+    <img class="main-img" src="/black thinker.avif">
+</div>
+<div class="trend-container">
+    <img class="popimg" src="/trend.png" alt="trending image"/>
+    <div class="trend-box">
+    <%let serialNum = 1%>
+    <%popBlogs.forEach((pop)=>{%>
+        <form class="popBlogs" action="/popblog" method="post">
+            <input type="submit" name="popblog" value="<%=pop.title%>" id="<%=pop.title%>" hidden>
+            <label for="<%=pop.title%>" class="blogger-label"><%=serialNum++%> <%=pop.title%></label>
+            <p class="popname"><%=pop.name%></p>
+            <p class="popdate"><%=pop.created_at%></p>
+        </form>
+       
+        
+    <%})%>
+    </div>
+</div>
+
+
+</body>
+</html>

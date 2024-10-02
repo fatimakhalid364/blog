@@ -1,0 +1,20 @@
+<%-include ("navbar.ejs") %>
+    
+<div class="your-blog">
+    <form class="your-blog-form" id="your-blog-form-id" action="/yours" method="post">
+        <input type="text" style="font-size: 20px; font-family: madimi one;" id="your-blog-title" placeholder="Type your title here" name="yourtitle">
+        
+        <input type="text" style="font-size: 20px; font-family: madimi one;" id="your-name" placeholder="Type your name here" name="author">
+        <input type="text" style="font-size: 20px; font-family: madimi one;" id="your-category" placeholder="Type your blog's category here" name="yourcategory">
+
+        
+        
+        <textarea id="your-blog-text" style="font-size: 17px;" placeholder="Type your text here..." name="yourtext" rows="100" cols="50"></textarea>
+        
+        <input id="writer" type="submit" name="authorid" value="<%=id%>" hidden>
+        <label for="writer" id="submit-button">Submit</label>
+    </form>
+    
+</div>
+
+    

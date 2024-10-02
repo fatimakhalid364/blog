@@ -1,0 +1,20 @@
+<%-include ("navbar.ejs") %>
+<%- include("searchbar.ejs") %>
+<div class="top-div">
+    <form class="form-horizontal" action="/back" method="post">
+        <button type="submit" class="back-button">Back</button>
+
+    </form>
+</div>
+<div class="full-page">
+    <div class="given-blog">
+    <h1><%=mySearch.title%></h1>
+    <h2><%=mySearch.name%></h2>
+    <p id="time"><%=mySearch.created_at%></p>
+    <p id="text"><%=mySearch.content%></p>
+    </div>
+</div>
+
+
+
+

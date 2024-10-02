@@ -1,0 +1,11 @@
+<div class="search-bar" id="search-bar-id">
+    <form class="search-form" method="post" action="/hunt">
+        <input id="submit-btn" type="submit" name="credential" value="<%=user.id%>" formaction="/type" hidden>
+        <label for="submit-btn" formaction="/type" class="plus-icon">+</label>
+        <input type="text" id="search-input" placeholder="Search for blogs" name="wantedlist" autocomplete="off">
+        <label id="done" for="search-input"><img src="tick.jpg" class="tick-icon" ></label>
+    </form>
+    <div id="suggestions" class="suggest-class"></div>
+        
+</div>
+

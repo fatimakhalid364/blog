@@ -1,0 +1,131 @@
+<%- include("navbar.ejs") %>
+
+<%- include("searchbar.ejs") %>
+<div class="supreme-container" id="scid">
+    <%- include("scrollbox.ejs") %>
+    <div class="blog-menu">
+    <%bloggers.forEach((blogger)=>{%>
+    <div class="adiv">
+        <form class="recent-blogs" action="/blog" method="post">
+            <input type="submit" name="blog" value="<%=blogger.title%>" id="<%=blogger.title%>" hidden>
+            <label for="<%=blogger.title%>" class="blogger-label"><%=blogger.title%></label>
+        
+        </form>
+        <p class="name"><%=blogger.name%></p>
+        <p class="time"><%=blogger.created_at%></p>
+    </div>
+    <%})%>
+    </div>
+    <%- include("gotoplanner.ejs") %>
+    
+
+</div>
+<script>
+    function handler(id) {
+        document.getElementById("task" + id).setAttribute("hidden", true);
+        document.getElementById("edit" + id).setAttribute("hidden", true);
+        document.getElementById("input" + id).removeAttribute("hidden");
+        document.getElementById("done" + id).removeAttribute("hidden");
+    }
+
+    
+
+    function redirectToPlanner() {
+            window.location.href = "/planner";
+        }
+    var scrollBoxId = document.getElementById("scroll-box-id");
+    var supremeId = document.getElementById("scid");
+    var headdiv = document.getElementById("headingdivid");
+    var bulbImg = document.getElementById("bulbimgid");
+    var searchBarId = document.getElementById("search-bar-id");
+    const searchPlace = document.getElementById("search-input");
+    const suggestionsDiv = document.getElementById("suggestions");
+    const bulb = document.getElementById("fimgid");
+    window.onscroll = scrollToFixed;
+    
+    function scrollToFixed() {
+        var scrollPosition = window.scrollY;
+        var viewPortHeight = window.innerHeight;
+        var fixedThreshold = viewPortHeight * 0.14;
+        
+        if (scrollPosition > fixedThreshold) {
+            scrollBoxId.classList.add("scroll-box-fixed");
+            supremeId.classList.add("supreme-container-fixed");
+            headdiv.classList.add("headingdivfixed");
+            bulbImg.classList.add("bulb-img-fixed");
+            searchBarId.classList.add("search-bar-fixed");
+        } else {
+            scrollBoxId.classList.remove("scroll-box-fixed");
+            supremeId.classList.remove("supreme-container-fixed");
+            headdiv.classList.remove("headingdivfixed");
+            bulbImg.classList.remove("bulb-img-fixed");
+            searchBarId.classList.remove("search-bar-fixed");
+        }
+    };
+
+   
+    
+    searchPlace.addEventListener('input', async function() {
+    const searchString = this.value;
+
+    try {
+        const response = await fetch(`/search?searchString=${encodeURIComponent(searchString)}`);
+        const filteredItems = await response.json();
+        if (filteredItems.length === 0) {
+        suggestionsDiv.style.display = 'none';
+        return;
+    }
+    suggestionsDiv.innerHTML = " ";
+
+        console.log(filteredItems);
+        filteredItems.forEach((item) => {
+            
+            const suggestionsElements = document.createElement("LI");
+            suggestionsElements.classList.add("search-index-list");
+            suggestionsElements.textContent = item.title.slice(0, 43);
+            suggestionsElements.addEventListener("click", () => {
+                searchPlace.value = item.title;
+                suggestionsDiv.classList.add("suggest-class");
+                suggestionsDiv.classList.remove("suggestions");
+                bulb.classList.add("bulbimg");
+                bulbImg.classList.remove("bulb-img-gone");
+                headdiv.classList.remove("headingdiv-gone");
+                
+            });
+            suggestionsDiv.appendChild(suggestionsElements);
+            suggestionsDiv.classList.remove("suggest-class");
+            suggestionsDiv.classList.add("suggestions");
+            
+
+        });
+        bulbImg.classList.add("bulb-img-gone");
+        bulb.classList.remove("bulbimg");
+        headdiv.classList.add("headingdiv-gone");
+        const tickImage = document.querySelector(".tick-icon");
+        const submission = document.querySelector(".search-form");
+            tickImage.addEventListener("click", function() {
+                window.location.href = "/hunt";
+                submission.submit();
+        });
+        
+
+        
+
+
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+});
+
+
+    
+    
+</script>
+
+
+
+
+
+
+
+

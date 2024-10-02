@@ -1,0 +1,54 @@
+<%-include ("navbar.ejs") %>
+<%- include("searchbar.ejs") %>
+<div class="alpha-div" id="alpha-div-id">
+<%- include("scrollbox.ejs") %>
+<div class="entblogssubmit">
+<%entBlogs.forEach((blog) => {%>
+    <form class="form1" action="/allentcontent" method="post">
+    <input type="submit" value="<%=blog.title%>" hidden/>
+    <label><%=blog.title%></label>
+    
+    </form>
+    <p class="name"><%=blog.name%></p>
+    <p class="time"><%=blog.created_at%></p>
+    
+<%})%>
+</div>
+<%- include("gotoplanner.ejs") %>
+</div>
+
+<script>
+    function redirectToPlanner() {
+                window.location.href = "/planner";
+            }
+    
+    var scrollBoxId = document.getElementById("scroll-box-id");
+        var headdiv = document.getElementById("headingdivid");
+        var bulbImg = document.getElementById("bulbimgid");
+        var searchBarId = document.getElementById("search-bar-id");
+        var alphaDiv = document.getElementById("alpha-div-id");
+        var myLabelId = document.getElementById("mylabelid");
+        window.onscroll = scrollToFixed;
+        
+        
+        function scrollToFixed() {
+            var scrollPosition = window.scrollY;
+            var viewPortHeight = window.innerHeight;
+            var fixedThreshold = viewPortHeight * 0.14;
+            
+            if (scrollPosition > fixedThreshold) {
+                scrollBoxId.classList.add("scroll-box-fixed");
+                headdiv.classList.add("headingdivfixed");
+                bulbImg.classList.add("bulb-img-fixed");
+                searchBarId.classList.add("search-bar-fixed");
+                alphaDiv.classList.add("alpha-div-fixed");
+            } else {
+                scrollBoxId.classList.remove("scroll-box-fixed");
+                headdiv.classList.remove("headingdivfixed");
+                bulbImg.classList.remove("bulb-img-fixed");
+                searchBarId.classList.remove("search-bar-fixed");
+                alphaDiv.classList.remove("alpha-div-fixed");
+            }
+        };
+</script>
+

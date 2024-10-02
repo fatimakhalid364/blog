@@ -1,0 +1,17 @@
+<div class="scroll-box" id="scroll-box-id">
+    <form  class="scroll-box-content" action="/myblogs" method="post">
+        <input type="submit" name="myblogid" value="<%=user.id%>" id="<%=user.id%>" hidden>
+        <label for="<%=user.id%>" id="mylabelid" class="myblog-label">My Blogs</label>
+        
+        
+        <%categories.forEach((category)=>{%>
+            <input type="submit" name="<%=category%>" value="<%=category%>" id="<%=category%>" formaction="/<%=category%>" hidden>
+            <label for="<%=category%>" id="<%=category%>" class="labels"><%=category%></label>
+        <%})%>
+        
+
+
+
+    </form>
+</div>
+
